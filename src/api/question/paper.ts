@@ -66,6 +66,11 @@ export interface PaperQuery extends BaseQuery {
   subjectId?:number;
 }
 
+export interface QuestionGroupQuery extends BaseQuery {
+  id?: number;
+  paperId?:number;
+}
+
 /**
  * AddPaperCommand
  */
@@ -164,54 +169,51 @@ export const deletePaperApi = (PaperId: string) => {
 };
 
 /** 已创建试卷的情况下，新增题目组 */
-export const addQuestionGroupApi = (data) => {
-  console.log(data);
-  return http.request<ResponseData<void>>("post", "/question/paper/questionGroup", {
-    data
-  });
-};
-
-/** 单个题目组关联题目 **/
-export const editQuestionGroupDetailApi = (data) => {
-  console.log(data);
-  return http.request<ResponseData<void>>("put", "/question/paper/questionGroup/detail", {
+export const addQuestionGroupApi = (data:QuestionGroupRequest) => {
+  return http.request<ResponseData<void>>("post", "/question/questionGroup/add", {
     data
   });
 };
 
 /** 仅修改题目组信息 **/
-export const editQuestionGroupApi = (data) => {
-  console.log(data);
-  return http.request<ResponseData<void>>("put", "/question/paper/questionGroup", {
+export const editQuestionGroupApi = (data:QuestionGroupRequest) => {
+  return http.request<ResponseData<void>>("post", "/question/questionGroup/update", {
+    data
+  });
+};
+
+/** 删除题目组信息 **/
+export const removeQuestionGroupApi = (data:QuestionGroupRequest) => {
+  return http.request<ResponseData<void>>("post", "/question/questionGroup/remove", {
     data
   });
 };
 
 /** 根据试卷id，获取题目组列表（不会关联查询题目组下面题目信息） */
-export const getQuestionGroupByPaperIdListApi = (params?: PaperQuery) => {
+export const getQuestionGroupByPaperIdListApi = (params?: QuestionGroupQuery) => {
   return http.request<ResponseData<QuestionGroupDTO[]>>(
     "get",
-    "/question/paper/questionGroup",
+    "/question/questionGroup/byPaperId",
     {
       params
     });
 };
 
 /** 根据试卷id，获取题目组列表（关联查询题目组下面题目信息） */
-export const getQuestionGroupDetailByPaperIdListApi = (params?: PaperQuery) => {
+export const getQuestionGroupDetailByPaperIdListApi = (params?: QuestionGroupQuery) => {
   return http.request<ResponseData<QuestionGroupDTO[]>>(
     "get",
-    "/question/paper/questionGroup/detail",
+    "/question/questionGroup/detail",
     {
       params
     });
 };
 
-/** 根据试卷id，获取题目组列表（关联查询题目组下面题目信息） */
-export const getQuestionGroupDetailByGroupIdListApi = (params?: PaperQuery) => {
+/** 根据题目组id，获取题目组列表（关联查询题目组下面题目信息） */
+export const getQuestionGroupDetailByGroupIdListApi = (params?: QuestionGroupQuery) => {
   return http.request<ResponseData<QuestionGroupDTO>>(
     "get",
-    "/question/paper/questionGroup/detailByGroupId",
+    "/question/questionGroup/detailByGroupId",
     {
       params
     });
@@ -219,21 +221,21 @@ export const getQuestionGroupDetailByGroupIdListApi = (params?: PaperQuery) => {
 
 /** 题组添加题目与排序 **/
 export const addQuestionGroupDetailApi = (params?:QuestionGroupDetailRequest) => {
-  return http.request<ResponseData<void>>("post", "/question/paper/questionGroup/detail/add", {
+  return http.request<ResponseData<void>>("post", "/question/questionGroup/detail/add", {
     params
   });
 };
 
 /** 题组移除题目 **/
 export const removeQuestionGroupDetailApi = (params?:QuestionGroupDetailRequest) => {
-  return http.request<ResponseData<void>>("post", "/question/paper/questionGroup/detail/remove", {
+  return http.request<ResponseData<void>>("post", "/question/questionGroup/detail/remove", {
     params
   });
 };
 
 /** 修改移除题目排序 **/
 export const updateQuestionGroupDetailApi = (params?:QuestionGroupDetailRequest) => {
-  return http.request<ResponseData<void>>("post", "/question/paper/questionGroup/detail/update", {
+  return http.request<ResponseData<void>>("post", "/question/questionGroup/detail/update", {
     params
   });
 };
