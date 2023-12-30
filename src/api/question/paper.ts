@@ -30,6 +30,8 @@ export interface PaperDTO {
   subjectTitle?: String;
   // 更新时间
   updateTime?: Date;
+  // 答题时长
+  answerTime?:number;
 }
 
 export interface QuestionGroupDTO {
@@ -86,18 +88,43 @@ export interface PaperRequest {
  * AddQuestionGroupCommand
  */
 export interface QuestionGroupRequest {
+  //题目组Id
   id?:number;
+  //题目组名称
   name?:String
+  //状态
   state: number;
+  //总分
   totalScore?: number;
+  //难度
   difficulty?:number;
+  //排序
   sort?:number;
+  //更新时间
   updateTime?: Date;
+  //试卷id
   paperId?: number;
-  description?: string;
+  //描述
+  description?: String;
+  //题目数量
+  questionNums?: String;
+  //关联题目信息
   questionIds?:[];
 }
 
+//题组详情对象
+export interface QuestionGroupDetailRequest {
+  //题组ID
+  groupIds:number;
+  details:QuestionGroupDetail[]
+}
+
+export interface QuestionGroupDetail {
+  //题目id
+  questionId?:number;
+  //题目排序
+  sort?:number
+}
 
 /** 获取试卷列表 */
 export const getPaperListApi = (params?: PaperQuery) => {
@@ -178,4 +205,25 @@ export const getQuestionGroupDetailByPaperIdListApi = (params?: PaperQuery) => {
     {
       params
     });
+};
+
+/** 题组添加题目与排序 **/
+export const addQuestionGroupDetailApi = (params?:QuestionGroupDetailRequest) => {
+  return http.request<ResponseData<void>>("post", "/question/paper/questionGroup/detail/add", {
+    params
+  });
+};
+
+/** 题组移除题目 **/
+export const removeQuestionGroupDetailApi = (params?:QuestionGroupDetailRequest) => {
+  return http.request<ResponseData<void>>("post", "/question/paper/questionGroup/detail/remove", {
+    params
+  });
+};
+
+/** 修改移除题目排序 **/
+export const updateQuestionGroupDetailApi = (params?:QuestionGroupDetailRequest) => {
+  return http.request<ResponseData<void>>("post", "/question/paper/questionGroup/detail/update", {
+    params
+  });
 };
