@@ -53,6 +53,8 @@ export interface QuestionGroupDTO {
   paperId?: number;
   // 描述
   description?: string;
+  //题目数量
+  questionNums?: number;
   // 关联试题信息
   questionDTOList?: QuestionDTO[];
 }
@@ -106,8 +108,6 @@ export interface QuestionGroupRequest {
   paperId?: number;
   //描述
   description?: String;
-  //题目数量
-  questionNums?: number;
   //关联题目信息
   questionIds?:[];
 }
