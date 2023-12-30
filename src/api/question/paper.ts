@@ -207,6 +207,16 @@ export const getQuestionGroupDetailByPaperIdListApi = (params?: PaperQuery) => {
     });
 };
 
+/** 根据试卷id，获取题目组列表（关联查询题目组下面题目信息） */
+export const getQuestionGroupDetailByGroupIdListApi = (params?: PaperQuery) => {
+  return http.request<ResponseData<QuestionGroupDTO>>(
+    "get",
+    "/question/paper/questionGroup/detailByGroupId",
+    {
+      params
+    });
+};
+
 /** 题组添加题目与排序 **/
 export const addQuestionGroupDetailApi = (params?:QuestionGroupDetailRequest) => {
   return http.request<ResponseData<void>>("post", "/question/paper/questionGroup/detail/add", {
