@@ -107,7 +107,7 @@ export interface QuestionGroupRequest {
   //描述
   description?: String;
   //题目数量
-  questionNums?: String;
+  questionNums?: number;
   //关联题目信息
   questionIds?:[];
 }
