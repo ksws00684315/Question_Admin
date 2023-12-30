@@ -193,7 +193,7 @@ export const removeQuestionGroupApi = (data:QuestionGroupRequest) => {
 export const getQuestionGroupByPaperIdListApi = (params?: QuestionGroupQuery) => {
   return http.request<ResponseData<QuestionGroupDTO[]>>(
     "get",
-    "/question/questionGroup/byPaperId",
+    "/question/questionGroup/getByPaperId",
     {
       params
     });
@@ -203,7 +203,7 @@ export const getQuestionGroupByPaperIdListApi = (params?: QuestionGroupQuery) =>
 export const getQuestionGroupDetailByPaperIdListApi = (params?: QuestionGroupQuery) => {
   return http.request<ResponseData<QuestionGroupDTO[]>>(
     "get",
-    "/question/questionGroup/detail",
+    "/question/questionGroup/detail/getByPaperId",
     {
       params
     });
@@ -213,7 +213,7 @@ export const getQuestionGroupDetailByPaperIdListApi = (params?: QuestionGroupQue
 export const getQuestionGroupDetailByGroupIdListApi = (params?: QuestionGroupQuery) => {
   return http.request<ResponseData<QuestionGroupDTO>>(
     "get",
-    "/question/questionGroup/detailByGroupId",
+    "/question/questionGroup/getByGroupId",
     {
       params
     });
